@@ -26,7 +26,7 @@ header{
 .left
 {
     order:1;
-    flex: 1;
+    flex: 2;
     border:2px solid blueviolet;
 }
 
@@ -41,17 +41,33 @@ main
 .right
 {
     border:2px solid pink;
-    flex:2;
+    flex:1;
     order:3;
 }
 
 .list 
 {
     border:2px solid salmon;
+    background-color: khaki;
+    padding: .8em;
 }
 .list >#textElement
 {
-    border:2px solid blue;
+    border:2px solid black;
+    border-radius: 5%;
+    width: 80%;
+    list-style: none;
+    padding: 1em;
+    margin: auto;
+    background-color: lightgray;
+}
+
+.list > #textElement:hover
+{
+    padding: 2em;
+    width: 100%; 
+    background-color:lightblue ;   
+    transition: 0.8s;
 }
 
 footer

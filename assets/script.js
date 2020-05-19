@@ -1,6 +1,5 @@
-const url = 'https://api.apify.com/v2/key-value-stores/tVaYRsPHLjNdNBu7S/records/LATEST?disableRedirect=true'
-
-/*using https://apify.com/covid-19 to fetch data*/
+const url = 'http://api.coronatracker.com/v2/analytics/country'
+/*using https://api.coronatracker.com/ to fetch data*/
 
 window.addEventListener('load', () => {
     fetchUsData();
@@ -16,6 +15,7 @@ async function fetchUsData()
     let div = document.querySelector(".list");
     const response = await fetch(url,option);
     const data = await response.json();
+    console.log(data);
     data.forEach(element =>  {
         div.append(AddToDom(element))
     });
@@ -26,8 +26,6 @@ function AddToDom(data)
     
     let content = document.createElement('li');
     content.id = "textElement";
-    content.innerText = `Country: ${data.country}\n
-    Infected: ${data.infected}\nTested: ${data.tested}\nDeceased: ${data.deceased}\nRecovered: ${data.recovered}
-    \nUpdated:\nDate: ${data.lastUpdatedApify.replace("T"," Time: ").replace(".000Z","")}\n`;
+    content.innerText = `Country: ${data.countryName}\nInfected: ${data.confirmed}\nDeceased: ${data.deaths}\nRecovered: ${data.recovered}`
     return content;
 }
