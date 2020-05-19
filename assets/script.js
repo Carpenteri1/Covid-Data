@@ -26,6 +26,8 @@ function AddToDom(data)
     
     let content = document.createElement('li');
     content.id = "textElement";
-    content.innerText = `Country: ${data.country}\nInfected: ${data.infected}\nTested: ${data.tested}\nDeceased: ${data.deceased}\nRecovered: ${data.recovered}\nUpdated: ${data.lastUpdatedApify}\n\n `;
+    content.innerText = `Country: ${data.country}\nInfected: ${data.infected}\nTested: 
+    ${data.tested}\nDeceased: ${data.deceased}\nRecovered: ${data.recovered}
+    \nUpdated:\nDate: ${data.lastUpdatedApify.replace("T"," Time: ").replace(".000Z","")}\n\n `;
     return content;
 }
