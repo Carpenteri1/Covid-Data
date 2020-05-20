@@ -1,4 +1,4 @@
-const url = 'http://api.coronatracker.com/v2/analytics/country'
+const url = 'https://api.coronatracker.com/v2/analytics/country'
 /*using https://api.coronatracker.com/ to fetch data*/
 
 window.addEventListener('load', () => {
