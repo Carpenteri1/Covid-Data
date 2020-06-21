@@ -1,36 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Net.Http.Formatting;
-using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Covid19_Data
 {
-    class GetRequest
+    //new API
+    //https://api.covid19api.com/summary
+    //https://documenter.getpostman.com/view/10808728/SzS8rjbc?version=latest
+
+    //Old API
+    //https://api.coronatracker.com/v2/analytics/country
+    public class GetRequest
     {
-        //string path = "https://api.coronatracker.com/v2/analytics/country";
-        public static async Task<CovidData> GetProductAsync(string path)
+        private static readonly HttpClient client = new HttpClient();
+        public static async Task ProcessRepositories()
         {
-            HttpClient client = new HttpClient();
-            CovidData covid = null;
-            HttpResponseMessage response = await client.GetAsync(path);
-            if (response.IsSuccessStatusCode)
-            {
+            var streamTask = client.GetStreamAsync("https://api.coronatracker.com/v2/analytics/country");
+            var repositories = await JsonSerializer.DeserializeAsync<List<CovidData>>(await streamTask);
+            foreach (var repo in repositories)
+                Console.WriteLine($"Country: {repo.country} Confirmed: {repo.confirmed} Deaths: {repo.deaths} Recovered: {repo.recovered} Last update: {repo.lastUpdated}\n");
 
-                covid = await response.Content.ReadAsAsync<CovidData>();
-                var formatters = new List<MediaTypeFormatter>() {new JsonMediaTypeFormatter()};
-;               
-            }
-            
-                return covid;
+            Console.ReadKey();
+
         }
-
-        public static void ShowProduct(CovidData covid)
-        {
-            Console.WriteLine($"Country: {covid.country}");
-        }
-
-
     }
 }
